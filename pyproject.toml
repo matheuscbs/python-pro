@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 flake8 = "^7.1.1"
 decorator = "^5.1.1"
+flask = "^3.1.0"
 
 
 [build-system]
