@@ -68,5 +68,7 @@ Uma tombola serve para sortear elementos:
     2
     >>> t.carregada()
     False
+    >>> itens
+    [1, 2]
 
 ```
