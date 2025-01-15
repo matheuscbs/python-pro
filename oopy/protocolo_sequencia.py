@@ -1,4 +1,7 @@
-class Trem:
+from collections import Sequence
+
+
+class Trem(Sequence):
     def __init__(self, num_vagoes):
         self.num_vagoes = num_vagoes
 
