@@ -64,7 +64,13 @@ Uma tombola serve para sortear elementos:
     1
     >>> t.carregada()
     True
-    >>> t.sortear()
+
+```
+
+O principal método da tombola é sortear. Portanto, se invocada diretamente ela executa esse método.
+
+```python
+    >>> t()
     2
     >>> t.carregada()
     False
