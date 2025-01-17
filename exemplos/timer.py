@@ -3,14 +3,14 @@ from tkinter import Button, Frame, Label
 
 class Timer(Frame):
     def __init__(self):
-        super.__init__()
+        super().__init__()  # Correção feita aqui
         self.inicio = self.agora = 15
-        self.pertence = None  # alarme pendente
+        self.pendente = None  # alarme pendente
         self.grid()
-        self.motrador = Label(
+        self.mostrador = Label(
             self, width=2, anchor='e', font='Helvetica 120 bold'
         )
-        self.motrador.grid(column=0, row=0, sticky='nswe')
+        self.mostrador.grid(column=0, row=0, sticky='nswe')
         self.bt_start = Button(self, text='start', command=self.start)
         self.bt_start.grid(column=0, row=1, sticky='we')
         self.atualizar_mostrador()

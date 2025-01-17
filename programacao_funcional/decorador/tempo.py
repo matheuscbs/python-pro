@@ -14,7 +14,7 @@ def mochileiro():
     return 42
 
 
-@logar(fmt='%d/%m/%Y %H:%M:%S')
+@logar(fmt='%d/%m/%Y %H:%M:%S')  # type: ignore
 def ola(nome):
     return f'Olá {nome}'
 
