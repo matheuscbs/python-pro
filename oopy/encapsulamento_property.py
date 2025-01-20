@@ -1,4 +1,7 @@
-class Bicicleta:
+import abc
+
+
+class Bicicleta(abc.ABC):
     _marca = 'Caloi'
 
     def __init__(self):
@@ -24,11 +27,13 @@ class Bicicleta:
         else:
             self._velocidade = 0
 
+    @abc.abstractmethod
     def pedalar(self):
-        raise NotImplementedError()
+        """Cada classe concreta deve definir o método pedalar com seu incremento na velocidade"""
 
+    @abc.abstractmethod
     def frear(self):
-        raise NotImplementedError()
+        """Cada classe concreta deve definir o método pedalar com seu incremento na velocidade"""
 
 
 class Monark(Bicicleta):
@@ -42,7 +47,7 @@ class Monark(Bicicleta):
 
 
 if __name__ == '__main__':
-    bicicleta = Bicicleta()
+    bicicleta = Monark()
     print(Bicicleta.marca())
     bicicleta.pedalar()
     bicicleta.frear()
