@@ -25,14 +25,20 @@ class Bicicleta:
             self._velocidade = 0
 
     def pedalar(self):
-        self._velocidade += 10
+        raise NotImplementedError()
 
     def frear(self):
-        self._velocidade -= 3
+        raise NotImplementedError()
 
 
 class Monark(Bicicleta):
     _marca = 'Monark'
+
+    def pedalar(self):
+        self._velocidade += 10
+
+    def frear(self):
+        self._velocidade -= 3
 
 
 if __name__ == '__main__':
