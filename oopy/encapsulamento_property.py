@@ -29,11 +29,13 @@ class Bicicleta(abc.ABC):
 
     @abc.abstractmethod
     def pedalar(self):
-        """Cada classe concreta deve definir o método pedalar com seu incremento na velocidade"""
+        """Cada classe concreta deve definir
+        o método pedalar com seu incremento na velocidade"""
 
     @abc.abstractmethod
     def frear(self):
-        """Cada classe concreta deve definir o método pedalar com seu incremento na velocidade"""
+        """Cada classe concreta deve definir
+        o método pedalar com seu incremento na velocidade"""
 
 
 class Monark(Bicicleta):
@@ -54,7 +56,8 @@ if __name__ == '__main__':
     bicicleta.frear()
     bicicleta.frear()
     bicicleta.frear()
-    # bicicleta.velocidade = -4  # acessando o endereço de memória e passando um valor não permitido
+    # bicicleta.velocidade = -4  # acessando o endereço de memória
+    # e passando um valor não permitido
     print(bicicleta.velocidade)
     print(Monark.marca())
     print(Monark.rodas())
