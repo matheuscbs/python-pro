@@ -1,9 +1,13 @@
 [tool.poetry]
-name = "objetos-pythonicos"
+name = "python-pro"
 version = "0.1.0"
 description = ""
 authors = ["Matheus Cardoso <matheuscbsmsn1994@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "pythonist" },
+    { include = "programacao_funcional" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -11,7 +15,7 @@ flake8 = "^7.1.1"
 decorator = "^5.1.1"
 flask = "^3.1.0"
 tk-tools = "^0.16.0"
-
+pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core"]
@@ -19,3 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.flake8]
 ignore = ["E501", "W504"]
+
+[tool.pylance]
+reportMissingImports = true
+reportMissingModuleSource = true
