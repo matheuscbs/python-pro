@@ -2,7 +2,7 @@ import functools
 import operator
 
 
-def divisao_por_2(n):
+def divisao_por_2(n):  # type: ignore
     return n // 2
 
 
