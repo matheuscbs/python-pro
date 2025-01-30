@@ -11,14 +11,22 @@ import pytest
 from exercicios.flask.app import RotaInexistente, rota, rotear
 
 
-@rota('/usuario')
-def usuario(nome):
-    return f'salvando {nome}'
+@pytest.fixture(score='session')
+def usuario():
+    @rota('/usuario')
+    def usuario_rota(nome):
+        return f'salvando {nome}'
+
+    return usuario_rota
 
 
-@rota('/carro')
-def carro(nome, ano):
-    return f'{nome} ano {ano}'
+@pytest.fixture(score='session')
+def carro():
+    @rota('/carro')
+    def carro_rota(nome, ano):
+        return f'{nome} ano {ano}'
+
+    return carro_rota
 
 
 def test_execucao_sem_parametro():
@@ -33,7 +41,7 @@ def test_execucao_sem_parametro():
 
 
 def test_execucao_com_parametro_posicional():
-    assert usuario('Renzo') == rotear('/usuario', 'Renzo') == 'salvando Renzo'
+    assert usuario('Renzo') == rotear('/usuario', 'Matheus') == 'salvando Matheus'
 
 
 def test_execucao_com_parametro_nomeado():
