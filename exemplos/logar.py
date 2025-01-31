@@ -1,9 +1,26 @@
 import functools
+from functools import partial
 from time import strftime
 
-# def logar(fmt):  #noqa
-#     def decorator(func):
-#         # wrapper
+
+def logar(func=None, *, fmt='%H:%M:%S'):
+    if func is None:
+        return partial(logar, fmt=fmt)
+
+    @functools.wraps(func)
+    def envoltoria(*args, **kwargs):
+        agora = strftime(fmt)
+        print(f'{agora} executado função {func.__name__}')
+        return func(*args, **kwargs)
+
+    return envoltoria
+
+
+# class logar:
+#     def __init__(self, fmt):
+#         self.fmt = fmt
+
+#     def __call__(self, func):
 #         @functools.wraps(func)
 #         def envoltoria(*args, **kwargs):
 #             agora = strftime('%H:%M:%S')
@@ -11,22 +28,6 @@ from time import strftime
 #             return func(*args, **kwargs)
 
 #         return envoltoria
-
-#     return decorator
-
-
-class logar:
-    def __init__(self, fmt):
-        self.fmt = fmt
-
-    def __call__(self, func):
-        @functools.wraps(func)
-        def envoltoria(*args, **kwargs):
-            agora = strftime('%H:%M:%S')
-            print(f'{agora} executado função {func.__name__}')
-            return func(*args, **kwargs)
-
-        return envoltoria
 
 
 def ola_mundo():
@@ -38,7 +39,7 @@ decorator = logar('%H:%M:%S')
 ola_mundo = decorator(ola_mundo)  # type: ignore
 
 
-@logar('%H-%M-%S')
+@logar
 def hello(nome):
     return f'Hello {nome}'
 
