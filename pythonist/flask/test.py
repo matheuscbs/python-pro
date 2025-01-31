@@ -8,10 +8,11 @@ O objetivo desse exercício é construir uma versão simplificada desse sistema
 
 """
 import pytest
-from exercicios.flask.app import RotaInexistente, rota, rotear
+
+from pythonist.flask.app import RotaInexistente, rota, rotear
 
 
-@pytest.fixture(score='session')
+@pytest.fixture(scope='session')
 def usuario():
     @rota('/usuario')
     def usuario_rota(nome):
@@ -20,7 +21,7 @@ def usuario():
     return usuario_rota
 
 
-@pytest.fixture(score='session')
+@pytest.fixture(scope='session')
 def carro():
     @rota('/carro')
     def carro_rota(nome, ano):
@@ -40,25 +41,25 @@ def test_execucao_sem_parametro():
     assert home() == rotear('/') == 'home executada'
 
 
-def test_execucao_com_parametro_posicional():
-    assert usuario('Renzo') == rotear('/usuario', 'Matheus') == 'salvando Matheus'
+def test_execucao_com_parametro_posicional(usuario):
+    assert usuario('Matheus') == rotear('/usuario', 'Matheus') == 'salvando Matheus'
 
 
-def test_execucao_com_parametro_nomeado():
+def test_execucao_com_parametro_nomeado(usuario):
     assert usuario('Foo') == rotear('/usuario', nome='Foo') == 'salvando Foo'
 
 
-def test_execucao_com_parametros_posicionais():
+def test_execucao_com_parametros_posicionais(carro):
     assert carro('Fusca', 88) == rotear(
         '/carro', 'Fusca', 88) == 'Fusca ano 88'
 
 
-def test_execucao_com_parametros_nomeados():
+def test_execucao_com_parametros_nomeados(carro):
     assert carro('Gol', 2000) == rotear(
         '/carro', ano=2000, nome='Gol') == 'Gol ano 2000'
 
 
-def test_execucao_com_parametro_posicional_e_nomeado():
+def test_execucao_com_parametro_posicional_e_nomeado(carro):
     assert carro('Celta', 99) == rotear(
         '/carro', 'Celta', 99) == 'Celta ano 99'
 
