@@ -8,10 +8,10 @@ class Quantidade:
     def __get__(self, item, owner):
         return getattr(item, self._nome)
 
-    def __set__(self, item, value):
-        if value <= 0:
+    def __set__(self, item, valor):
+        if valor <= 0:
             raise TypeError('Quantidade deveria ser positiva')
-        setattr(item, self._nome, value)
+        setattr(item, self._nome, valor)
 
 
 class ItemPedido:
@@ -43,12 +43,18 @@ def test_set_quantidade_negativa_no_init():
         ItemPedido('Ervilha', 1.21, -2)
 
 
-def test_set_preco_negativa():
+def test_set_preco_negativo():
     item = ItemPedido('Ervilha', 1.21, 2)
     with pytest.raises(TypeError):
         item.preco = -1.21
 
 
-def test_set_preco_negativa_no_init():
+def test_set_preco_negativo_no_init():
     with pytest.raises(TypeError):
         ItemPedido('Ervilha', -1.21, 2)
+
+
+def test_propriedade_de_descriptor():
+    item = ItemPedido('Ervilha', 1.21, 2)
+    assert {'descricao': 'Ervilha', '_preco': 1.21,
+            '_quantidade': 2} == item.__dict__
