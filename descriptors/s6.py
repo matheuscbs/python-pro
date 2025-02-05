@@ -25,7 +25,7 @@ class Quantidade:
 class _ModeloMeta(type):
     def __init__(self, cls_name, bases, propriedades):
         for nome, valor in propriedades.items():
-            if isinstance(valor, Quantidade):
+            if hasattr(valor, 'set_nome'):
                 valor.set_nome(nome)
         super().__init__(cls_name, bases, propriedades)
 
