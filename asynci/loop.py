@@ -62,7 +62,7 @@ def executar_aleatoriamente(chamavel):
 
 def iniciar_loop_de_eventos_sincrono():
     global _tarefas
-    while True:
+    while _tarefas:
         for tarefa in _tarefas:
             tarefa()
         _tarefas = list(filter(lambda t: t.status == ESPERANDO, _tarefas))
