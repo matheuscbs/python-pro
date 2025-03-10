@@ -19,6 +19,7 @@ pytest = "^8.3.4"
 requests = "^2.32.3"
 requests-mock = "^1.12.1"
 aiohttp = "^3.11.12"
+pyautogui = "^0.9.54"
 
 [build-system]
 requires = ["poetry-core"]
