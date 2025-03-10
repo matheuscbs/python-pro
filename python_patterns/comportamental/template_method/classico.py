@@ -3,9 +3,12 @@ from abc import ABC, abstractmethod
 
 class AbstractSpam(ABC):
     def enviar_spam_para_todos_usuarios(self, msg):
-        # Obter uma lista de contatos
-        for nome, endereco in self.obter_contatos():
-            # Para cada usuário, enviar uma msg pelo canal
+        contatos = self.obter_contatos()
+
+        if not isinstance(contatos, list):  # Garantia extra para evitar erro de tipo
+            raise TypeError("O método obter_contatos() deve retornar uma lista de tuplas.")
+
+        for nome, endereco in contatos:
             self.enviar_mensagem(nome, endereco, msg)
 
     @abstractmethod
@@ -13,9 +16,9 @@ class AbstractSpam(ABC):
         """
             Deve retornar uma lista onde cada elemento é uma tupla.
             O primeiro elemento da tupla é o nome do contato e o segundo o seu endereço no respectivo canal
-            de envio de mensagem
+            de envio de mensagem.
         """
-        pass
+        return []  # Retornando uma lista vazia evita erro de NoneType
 
     @abstractmethod
     def enviar_mensagem(self, nome, endereco, msg):
