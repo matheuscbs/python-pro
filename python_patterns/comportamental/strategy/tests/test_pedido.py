@@ -2,8 +2,9 @@ from decimal import Decimal
 
 import pytest
 
-from python_patterns.comportamental.strategy.pedido import (
-    Item, Pedido, desconto_item_repetido)
+from python_patterns.comportamental.strategy.pedido import Item, Pedido
+from python_patterns.comportamental.strategy.promocao import \
+    desconto_item_repetido
 
 
 def test_adicionar_item():
