@@ -1,14 +1,20 @@
 from abc import ABC, abstractmethod
 from decimal import Decimal
 
-from python_patterns.comportamental.strategy.pedido import Pedido
-
 
 class Desconto(ABC):
     """Classe base de todos os descontos"""
     @abstractmethod
-    def calcular_desconto(self, pedido: Pedido):
+    def calcular_desconto(self, pedido):
         """Deve calcular o valor de desconto de acordo com o pedido."""
+
+
+class _DescontoNullObject:
+    def calcular_desconto(self, pedido):
+        return pedido.subtotal()
+
+
+desconto_null_object = _DescontoNullObject()
 
 
 class _DescontoItemRepetido(Desconto):
@@ -16,10 +22,17 @@ class _DescontoItemRepetido(Desconto):
     igual ou seperior a 10
 
     """
-    def calcular_desconto(self, pedido: Pedido):
+    def calcular_desconto(self, pedido):
         desconto = pedido.soma_dos_items_quantidade_maior_que(10)
         desconto *= Decimal('0.10')
         return pedido.subtotal() - desconto
 
 
+class _DescontoGrandePedido(Desconto):
+    def calcular_desconto(self, pedido):
+        return pedido.subtotal() * Decimal('0.95')
+
+
 desconto_item_repetido = _DescontoItemRepetido()
+
+desconto_grande_pedido = _DescontoGrandePedido()
