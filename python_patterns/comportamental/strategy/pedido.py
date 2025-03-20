@@ -46,12 +46,15 @@ class Desconto(ABC):
         """Deve calcular o valor de desconto de acordo com o pedido."""
 
 
-class DescontoItemRepetido:
+class _DescontoItemRepetido(Desconto):
     """ Fornece 10% de desconto em cima de items com quantidade
     igual ou seperior a 10
 
     """
-    def calcular_desconto(self, pedido):
+    def calcular_desconto(self, pedido: Pedido):
         desconto = pedido.soma_dos_items_quantidade_maior_que(10)
         desconto *= Decimal('0.10')
         return pedido.subtotal() - desconto
+
+
+desconto_item_repetido = _DescontoItemRepetido()
